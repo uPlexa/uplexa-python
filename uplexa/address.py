@@ -13,8 +13,8 @@ if sys.version_info < (3,): # pragma: no cover
 else:                       # pragma: no cover
     _str_types = (str, bytes)
 
-_ADDR_REGEX = re.compile(r'^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}$')
-_IADDR_REGEX = re.compile(r'^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{106}$')
+_ADDR_REGEX = re.compile(r'^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{98}$')
+_IADDR_REGEX = re.compile(r'^[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{109}$')
 
 class BaseAddress(object):
     label = None
@@ -22,7 +22,7 @@ class BaseAddress(object):
     def __init__(self, addr, label=None):
         addr = str(addr)
         if not _ADDR_REGEX.match(addr):
-            raise ValueError("Address must be 95 characters long base58-encoded string, "
+            raise ValueError("Address must be 98 characters long base58-encoded string, "
                 "is {addr} ({len} chars length)".format(addr=addr, len=len(addr)))
         self._decode(addr)
         self.label = label or self.label
@@ -154,7 +154,7 @@ class IntegratedAddress(Address):
     def __init__(self, address):
         address = str(address)
         if not _IADDR_REGEX.match(address):
-            raise ValueError("Integrated address must be 106 characters long base58-encoded string, "
+            raise ValueError("Integrated address must be 109 characters long base58-encoded string, "
                 "is {addr} ({len} chars length)".format(addr=address, len=len(address)))
         self._decode(address)
 
