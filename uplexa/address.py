@@ -80,7 +80,7 @@ class Address(BaseAddress):
     :param address: a uPlexa address as string-like object
     :param label: a label for the address (defaults to `None`)
     """
-    _valid_netbytes = (18, 53, 24)
+    _valid_netbytes = (0x161f23, 0x3e5e23, 0x45e23)
     # NOTE: _valid_netbytes order is (mainnet, testnet, stagenet)
 
     def view_key(self):
@@ -123,7 +123,7 @@ class Address(BaseAddress):
         payment_id = numbers.PaymentID(payment_id)
         if not payment_id.is_short():
             raise TypeError("Payment ID {0} has more than 64 bits and cannot be integrated".format(payment_id))
-        prefix = 54 if self.is_testnet() else 25 if self.is_stagenet() else 19
+        prefix = 0x1d0b24 if self.is_testnet() else 0xe5326 if self.is_stagenet() else 0x1661a3
         data = bytearray([prefix]) + self._decoded[1:65] + struct.pack('>Q', int(payment_id))
         checksum = bytearray(keccak_256(data).digest()[:4])
         return IntegratedAddress(base58.encode(hexlify(data + checksum)))
@@ -135,7 +135,7 @@ class SubAddress(BaseAddress):
     Any type of address which is not the master one for a wallet.
     """
 
-    _valid_netbytes = (42, 63, 36)
+    _valid_netbytes = (294, 294, 294)
     # NOTE: _valid_netbytes order is (mainnet, testnet, stagenet)
 
     def with_payment_id(self, _):
@@ -148,7 +148,7 @@ class IntegratedAddress(Address):
     A master address integrated with payment id (short one, max 64 bit).
     """
 
-    _valid_netbytes = (19, 54, 25)
+    _valid_netbytes = (0x1661a3, 0x1d0b24, 0xe5326)
     # NOTE: _valid_netbytes order is (mainnet, testnet, stagenet)
 
     def __init__(self, address):
@@ -169,7 +169,7 @@ class IntegratedAddress(Address):
         """Returns the base address without payment id.
         :rtype: :class:`Address`
         """
-        prefix = 53 if self.is_testnet() else 24 if self.is_stagenet() else 18
+        prefix = 0x45e23 if self.is_testnet() else 0x45e23 if self.is_stagenet() else 0x161f23
         data = bytearray([prefix]) + self._decoded[1:65]
         checksum = keccak_256(data).digest()[:4]
         return Address(base58.encode(hexlify(data + checksum)))

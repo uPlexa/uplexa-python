@@ -129,7 +129,7 @@ class Tests(object):
         self.assertRaises(
             ValueError,
             address,
-            'Wmtj8UAJhdrhbKvwyBJmLEUZKHcffv2VHNBaq6oTxJFwJjUj3QwMUSS32mddSX7vchbxXdmb4QuZA9TsN47441f61yAYLQYTo')
+            'UPX1qwugRf6Z8X9vcRpu6tTsPis76HkLq2RWPo2bN9ZUcUfnZACaGgzcmYnb18vGnAdzUvbWdLGf146Ccw88zeJb5VzbQoCCcX')
         # invalid netbyte
         self.assertRaises(
             ValueError,
@@ -150,7 +150,7 @@ class Tests(object):
 
 
 class AddressTestCase(Tests, unittest.TestCase):
-    addr = '47ewoP19TN7JEEnFKUJHAYhGxkeTRH82sf36giEp9AcNfDBfkAtRLX7A6rZz18bbNHPNV7ex6WYbMN3aKisFRJZ8Ebsmgef'
+    addr = 'UPX1qwugRf6Z8X9vcRpu6tTsPis76HkLq2RWPo2bN9ZUcUfnZACaGgzcmYnb18vGnAdzUvbWdLGf146Ccw88zeJb5VzbQoCCcX'
     ssk = 'e0fe01d5794e240a26609250c0d7e01673219eececa3f499d5cfa20a75739b0a'
     svk = '6d9056aa2c096bfcd2f272759555e5764ba204dd362604a983fa3e0aafd35901'
     psk = '9f2a76d879aaf0670039dc8dbdca01f0ca26a2f6d93268e3674666bfdc5957e4'
